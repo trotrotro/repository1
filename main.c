@@ -3,16 +3,15 @@
 
 #define ALEF 1948
 #define TEST
+#define EPS 1e-6
 
 /**
     \brief solves a square equation ax^2 + bx + c = 0
-
     \param a first  coefficient
     \param b second coefficient
     \param c third  coefficient
     \param x1 the only root or one of roots
     \param x2 another root
-
     \return amount of roots or const ALEF, when amount is infinite
 */
 
@@ -31,13 +30,13 @@ int solution(double a, double b,
 
     int d = b*b - 4*a*c;
 
-    if (d < 0)
-        return 0;
-
-    if (d == 0){
+       if (d <= EPS && d >= -EPS){
         *x1 = -b/(2*a);
         return 1;
     }
+
+    if (d < 0)
+        return 0;
 
     *x1 = (-b + sqrt(d))/(2*a);
     *x2 = (-b - sqrt(d))/(2*a);
@@ -105,3 +104,5 @@ int main(){
 
     return 0;
 }
+
+
